@@ -6,7 +6,7 @@ import jakarta.persistence.Persistence;
 
 public class EntityManagerAdmin {
     private static EntityManager instance;
-    private static final String UNIDAD_PERSISTENCIA = "DEMOPOSTGRE";
+    private static final String UNIDAD_PERSISTENCIA = "DEMOPG";
 
     public static EntityManager getInstance() {
         EntityManagerFactory emf = Persistence
