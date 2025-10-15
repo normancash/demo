@@ -41,4 +41,50 @@ public class ImplDAOSucursal implements IDAOSucursal {
             em.close();
         }
     }
+
+    @Override
+    public Sucursal getById(Integer id) {
+        EntityManager em = EntityManagerAdmin
+                .getInstance();
+        try {
+            Sucursal entity = em.find(Sucursal.class, id);
+            return entity;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {em.close();}
+        return null;
+    }
+
+    @Override
+    public void remove(Sucursal entity) {
+        EntityManager em = EntityManagerAdmin
+                .getInstance();
+        try {
+            em.getTransaction().begin();
+            em.remove(em.merge(entity));
+            em.flush();
+            em.getTransaction().commit();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {em.close();}
+    }
+
+    @Override
+    public Sucursal update(Sucursal entity) {
+        EntityManager em = EntityManagerAdmin.getInstance();
+        try {
+            em.getTransaction().begin();
+            Sucursal e = em.merge(entity);
+            em.flush();
+            em.getTransaction().commit();
+            return e;
+        }
+        catch (Exception e) {e.printStackTrace();}
+        finally {em.close();}
+        return null;
+    }
 }
